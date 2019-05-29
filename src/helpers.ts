@@ -54,23 +54,9 @@ export function unleashTheMonsters(num: number): string[] {
 	return monsters
 }
 
-export function setStartingLocations(cities, monsters): City[] {
+export function setStartingLocations(cities: City[], monsters: string[]): City[] {
 	monsters.forEach(monster => {
 		cities[Math.floor(Math.random() * cities.length)].monster = monster
-	})
-	return cities
-}
-
-export function getNextDestination(destinations: string[]): string {
-	return destinations[Math.floor(Math.random() * destinations.length)]
-}
-
-export function deleteRoutesToCity(cities: City[], destroyedCity: string): City[] {
-	cities.forEach(city => {
-		if (city.destinations.includes(destroyedCity)) {
-			let updatedDestinations = city.destinations.filter(dest => dest !== destroyedCity)
-			city.destinations = updatedDestinations
-		}
 	})
 	return cities
 }

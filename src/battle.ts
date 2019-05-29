@@ -1,4 +1,4 @@
-import { getNextDestination, deleteRoutesToCity, City } from "./helpers"
+import { City } from "./helpers"
 
 export default function battle(map: City[]): City[] {
 	let round = 0
@@ -32,4 +32,18 @@ export default function battle(map: City[]): City[] {
 		round++
 	}
 	return map
+}
+
+function getNextDestination(destinations: string[]): string {
+	return destinations[Math.floor(Math.random() * destinations.length)]
+}
+
+function deleteRoutesToCity(cities: City[], destroyedCity: string): City[] {
+	cities.forEach(city => {
+		if (city.destinations.includes(destroyedCity)) {
+			let updatedDestinations = city.destinations.filter(dest => dest !== destroyedCity)
+			city.destinations = updatedDestinations
+		}
+	})
+	return cities
 }

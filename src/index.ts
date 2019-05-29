@@ -2,7 +2,6 @@ import * as fs from "fs"
 import * as path from "path"
 
 import battle from "./battle"
-
 import {
 	getUserInput,
 	validateUserInput,
@@ -17,7 +16,7 @@ const textFile = fs.readFileSync(path.join(__dirname, "../data/world_map_medium.
 const rawDataByLines = textFile.split("\n")
 const maxInput = rawDataByLines.length
 const userInput = getUserInput(maxInput)
-const numberOfMonsters = validateUserInput(userInput, rawDataByLines.length)
+const numberOfMonsters = validateUserInput(userInput, maxInput)
 
 // war
 console.log(`Starting the game with ${numberOfMonsters} monsters...`)
