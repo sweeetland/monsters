@@ -81,6 +81,7 @@ function unformatData(initialRows, cities) {
         cities.forEach(newCity => {
             // if the city hasn't been destroyed
             if (cityName === newCity.cityName) {
+                // get remaining destinations
                 let updatedDestinations = [];
                 newCity.destinations.forEach(destination => {
                     updatedDestinations = splitRow.filter(direction => direction.includes(destination));

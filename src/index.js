@@ -37,7 +37,7 @@ while (round < 1000) {
             map = helpers_1.deleteRoutesToCity(map, nextCity.cityName);
         }
         else {
-            // No conflict
+            // No conflict so just move monster
             nextCity.monster = currentCity.monster;
             currentCity.monster = '';
         }
