@@ -14,7 +14,6 @@ import {
 
 const textFile = fs.readFileSync(path.join(__dirname, '../data/world_map_medium.txt'), 'utf8');
 const rawDataByLines = textFile.split('\n');
-
 const maxInput = rawDataByLines.length;
 const userInput = getUserInput(maxInput);
 const numberOfMonsters = validateUserInput(userInput, rawDataByLines.length);
@@ -23,8 +22,8 @@ console.log(`Starting the game with ${numberOfMonsters} monsters...`);
 
 const mapWithoutMonsters = formatData(rawDataByLines);
 const monsters = unleashTheMonsters(numberOfMonsters);
-let map = setStartingLocations(mapWithoutMonsters, monsters);
 
+let map = setStartingLocations(mapWithoutMonsters, monsters);
 let round = 0;
 
 while (round < 1000) {
@@ -38,8 +37,8 @@ while (round < 1000) {
         let nextCity = map.find(c => c.cityName === nextDestination);
         if (!nextCity) return;
 
-        // city already occupied by an existing monster
         if (nextCity.monster) {
+            // city already occupied by an existing monster
             console.log(
                 `The City of ${nextCity.cityName} has been destroyed by ${
                     currentCity.monster
