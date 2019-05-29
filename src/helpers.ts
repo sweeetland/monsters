@@ -4,7 +4,13 @@ import * as readline from "readline-sync"
 export interface City {
 	cityName?: string
 	monster?: string
-	destinations: string[]
+	destinations: Destination
+}
+export interface Destination {
+	north?: string
+	east?: string
+	south?: string
+	west?: string
 }
 
 export function getUserInput(maxInput: number): string {
@@ -32,13 +38,14 @@ export function validateUserInput(userInput: string | number, maxInput: number):
 export function formatData(rows: string[]): City[] {
 	let cities: City[] = []
 	rows.forEach(row => {
-		let destinations: string[] = []
+		let destinations: Destination = {}
 		let splitRow = row.split(" ")
 		let cityName = splitRow.shift()
 		splitRow.forEach(direction => {
-			let vals = direction.split("=")
-			let destination = vals[1]
-			destinations.push(destination)
+			let pairs = direction.split("=")
+			let key = pairs[0]
+			let value = pairs[1]
+			destinations = { ...destinations, [key]: value }
 		})
 		cities = [...cities, { cityName, monster: "", destinations }]
 	})
@@ -61,25 +68,14 @@ export function setStartingLocations(cities: City[], monsters: string[]): City[]
 	return cities
 }
 
-export function unformatData(initialRows: string[], cities: City[]): string {
-	// initialRows is the rawData pre war
-	// cities is the remaining cities post war
-	let newRows: string[] = []
-	initialRows.forEach(row => {
-		let splitRow = row.split(" ")
-		let cityName = splitRow.shift()
-		cities.forEach(newCity => {
-			if (cityName === newCity.cityName) {
-				// the city hasn't been destroyed
-				// get remaining destinations
-				let updatedDestinations: string[] = []
-				newCity.destinations.forEach(destination => {
-					updatedDestinations = splitRow.filter(direction => direction.includes(destination))
-				})
-				newRows.push(`${cityName} ` + updatedDestinations.join(" "))
-			}
-		})
+export function unformatData(cities: City[]): string {
+	let rows: string[] = []
+	cities.forEach(({ cityName, destinations }) => {
+		let string = `${cityName} `
+		for (let [key, value] of Object.entries(destinations)) {
+			string += `${key}=${value} `
+		}
+		rows.push(string.trim())
 	})
-	// Return in the same format as the input file
-	return newRows.join("\n")
+	return rows.join("\n")
 }

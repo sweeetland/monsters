@@ -1,10 +1,10 @@
-import { City } from "./helpers"
+import { City, Destination } from "./helpers"
 
 export default function battle(map: City[]): City[] {
 	let round = 0
 	while (round < 1000) {
 		let occupiedCities = map.filter(
-			({ monster, destinations }) => monster && destinations.length > 0
+			({ monster, destinations }) => monster && Object.values(destinations).length > 0
 		)
 		if (occupiedCities.length === 0) break
 
@@ -20,11 +20,11 @@ export default function battle(map: City[]): City[] {
 						nextCity.monster
 					}!`
 				)
-				// destroy the city and routes to the city
+				// destroy the city and routes to city
 				map.splice(map.indexOf(nextCity), 1)
 				map = deleteRoutesToCity(map, nextCity.cityName)
 			} else {
-				// No conflict so just move monster
+				// no conflict so just move monster
 				nextCity.monster = currentCity.monster
 				currentCity.monster = ""
 			}
@@ -34,16 +34,18 @@ export default function battle(map: City[]): City[] {
 	return map
 }
 
-function getNextDestination(destinations: string[]): string {
-	return destinations[Math.floor(Math.random() * destinations.length)]
+function getNextDestination(destinations: Destination): string {
+	return Object.values(destinations)[Math.floor(Math.random() * Object.values(destinations).length)]
 }
 
 function deleteRoutesToCity(cities: City[], destroyedCity: string): City[] {
 	cities.forEach(city => {
-		if (city.destinations.includes(destroyedCity)) {
-			let updatedDestinations = city.destinations.filter(dest => dest !== destroyedCity)
-			city.destinations = updatedDestinations
-		}
+		const direction = getKeyByValue(city.destinations, destroyedCity)
+		if (direction) delete city.destinations[direction]
 	})
 	return cities
+}
+
+function getKeyByValue(object: Destination, value: string): string {
+	return Object.keys(object).find(key => object[key] === value)
 }

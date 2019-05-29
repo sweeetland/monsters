@@ -18,7 +18,7 @@ const maxInput = rawDataByLines.length
 const userInput = getUserInput(maxInput)
 const numberOfMonsters = validateUserInput(userInput, maxInput)
 
-// war
+// go to war
 console.log(`Starting the game with ${numberOfMonsters} monsters...`)
 
 const mapWithoutMonsters = formatData(rawDataByLines)
@@ -26,8 +26,10 @@ const monsters = unleashTheMonsters(numberOfMonsters)
 const mapPreWar = setStartingLocations(mapWithoutMonsters, monsters)
 const mapPostWar = battle(mapPreWar)
 
-// save the data
-const postWarData = unformatData(rawDataByLines, mapPostWar)
+// write data to file
+console.log("mapPostWar: ", mapPostWar)
+const postWarData = unformatData(mapPostWar)
+console.log("postWarData: ", postWarData)
 fs.writeFileSync(path.join(__dirname, "../data/world_map_post_war.txt"), postWarData)
 
 console.log("------------------------")
