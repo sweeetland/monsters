@@ -24,7 +24,8 @@ Then follow the instructions in your terminal. Watch out, there are monsters abo
 
 - City names don't contain any whitespace characters
 - Each monster will move once per round and they move synchronously one after the other
-- Readability over brevity is preferred
-- TypeScript is allowed
+- On start there is only one monster per city so max number of monsters is dependant number of starting cities
+- Readability over brevity
+- TypeScript is allowed 🚀
 
 See [descriptions](https://github.com/sweeetland/monsters/blob/master/data/description.txt) for further details.
