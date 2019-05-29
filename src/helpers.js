@@ -20,7 +20,8 @@ function validateUserInput(userInput, maxInput) {
     userInput = Number(userInput);
     while (!userInput || userInput <= 0 || userInput > maxInput) {
         console.log(`Ooops that's an invalid input - 👎  please enter an an integer between 1 - ${maxInput}...`);
-        userInput = readline.question('👉   ');
+        console.log('To quit Monster game press crtl + c');
+        userInput = Number(readline.question('👉   '));
     }
     return Math.floor(userInput);
 }
@@ -79,8 +80,8 @@ function unformatData(initialRows, cities) {
         let splitRow = row.split(' ');
         let cityName = splitRow.shift();
         cities.forEach(newCity => {
-            // if the city hasn't been destroyed
             if (cityName === newCity.cityName) {
+                // the city hasn't been destroyed
                 // get remaining destinations
                 let updatedDestinations = [];
                 newCity.destinations.forEach(destination => {

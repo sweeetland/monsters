@@ -29,8 +29,8 @@ while (round < 1000) {
         let nextCity = map.find(c => c.cityName === nextDestination);
         if (!nextCity)
             return;
-        // city already occupied by an existing monster
         if (nextCity.monster) {
+            // city already occupied by an existing monster
             console.log(`The City of ${nextCity.cityName} has been destroyed by ${currentCity.monster} and ${nextCity.monster}!`);
             // destroy the city and routes to the city
             map.splice(map.indexOf(nextCity), 1);
