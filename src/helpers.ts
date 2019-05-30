@@ -40,11 +40,11 @@ export function formatData(rows: string[]): City[] {
 	rows.forEach(row => {
 		let destinations: Destination = {}
 		let splitRow = row.split(" ")
-		let cityName = splitRow.shift()
+		const cityName = splitRow.shift()
 		splitRow.forEach(direction => {
-			let pairs = direction.split("=")
-			let key = pairs[0]
-			let value = pairs[1]
+			const pairs = direction.split("=")
+			const key = pairs[0]
+			const value = pairs[1]
 			destinations = { ...destinations, [key]: value }
 		})
 		cities = [...cities, { cityName, monster: "", destinations }]
@@ -54,7 +54,7 @@ export function formatData(rows: string[]): City[] {
 }
 
 export function unleashTheMonsters(num: number): string[] {
-	let monsters: string[] = []
+	const monsters: string[] = []
 	for (let i = 0; i < num; i++) {
 		monsters.push(uniqueNamesGenerator())
 	}
@@ -69,7 +69,7 @@ export function setStartingLocations(cities: City[], monsters: string[]): City[]
 }
 
 export function unformatData(cities: City[]): string {
-	let rows: string[] = []
+	const rows: string[] = []
 	cities.forEach(({ cityName, destinations }) => {
 		let string = `${cityName} `
 		for (let [key, value] of Object.entries(destinations)) {

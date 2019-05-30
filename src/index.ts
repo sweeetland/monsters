@@ -27,9 +27,7 @@ const mapPreWar = setStartingLocations(mapWithoutMonsters, monsters)
 const mapPostWar = battle(mapPreWar)
 
 // write data to file
-console.log("mapPostWar: ", mapPostWar)
 const postWarData = unformatData(mapPostWar)
-console.log("postWarData: ", postWarData)
 fs.writeFileSync(path.join(__dirname, "../data/world_map_post_war.txt"), postWarData)
 
 console.log("------------------------")

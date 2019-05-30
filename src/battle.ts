@@ -3,14 +3,14 @@ import { City, Destination } from "./helpers"
 export default function battle(map: City[]): City[] {
 	let round = 0
 	while (round < 1000) {
-		let occupiedCities = map.filter(
+		const occupiedCities = map.filter(
 			({ monster, destinations }) => monster && Object.values(destinations).length > 0
 		)
 		if (occupiedCities.length === 0) break
 
 		occupiedCities.forEach(currentCity => {
-			let nextDestination = getNextDestination(currentCity.destinations)
-			let nextCity = map.find(c => c.cityName === nextDestination)
+			const nextDestination = getNextDestination(currentCity.destinations)
+			const nextCity = map.find(c => c.cityName === nextDestination)
 			if (!nextCity) return
 
 			if (nextCity.monster) {

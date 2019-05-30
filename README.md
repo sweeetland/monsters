@@ -26,6 +26,6 @@ Then follow the instructions in your terminal. Watch out, there are monsters abo
 - Each monster will move once per round and they move synchronously one after the other
 - On game start max one monster per city so max number of monsters is dependant upon the number of cities
 - Readability over brevity
-- TypeScript is allowed 🚀
+- TypeScript isn't cheating 🚀
 
 See [descriptions](https://github.com/sweeetland/monsters/blob/master/data/description.txt) for further details.
